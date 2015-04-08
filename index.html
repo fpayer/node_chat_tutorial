@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO Chat App</title>
+
+	<style>
+	  #chat {
+		margin: 10px;
+	  }
+	  #sidebar {
+		margin: 10px;
+		float: left;
+	  }
+	  #chatter {
+		width: 75%;
+		padding-right: 10px;
+		margin-right: 10px;
+		float: left;
+		height: calc(100% - 60px);
+		overflow-y: scroll;
+	  }
+	  #msgbox {
+		width: 75%;
+		margin: 10px;
+		position: fixed;
+		bottom: 0;
+	  }
+    </style>
+
+	<script src="http://code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script>
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="/semantic/dist/semantic.css">
+	<script src="/semantic/dist/semantic.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script>
+      var socket = io();
+	  var name = 'Guest';
+	  $(document).ready(function(){
+		// opens dialog box for name input on page load
+		$('#whobox')
+	  	  .modal({
+			closable : false
+		  })
+		  .modal('show')
+		;
+		// autoscroll jquery function
+		setInterval(function(){
+		  $('#chatter').scrollTop($('#chatter').scrollTop() + 10);
+		}, 10);
+		// define button functions
+		$('#name_btn').on('click', function(){
+		  name = $('#username').val();
+		  $('#whobox').modal('hide');
+		  return false;
+		});
+		$('#send_btn').on('click', function(){
+		  var msgStr = $('#m').val();
+		  socket.emit('chat_msg', { name: name, msg: msgStr });
+		  console.log('Message sent: ' + msgStr);	
+		  $('#m').val('');
+		  return false;
+		});
+		socket.on('chat_msg', function(data){
+		  $('#messages').append($('<tr>').append($('<td>').text( data.name + ': ' + data.msg))); 
+		});
+	  });
+    </script>
+  </head>
+  <body>
+	<div id="chatter">
+	<table id="chat" class="ui celled striped table left">
+	  <thead>
+		<tr>
+		  <th>
+			NodeJS Chat App
+		  </th>
+		</tr>
+	  </thead>
+	  <tbody id="messages">
+
+	  </tbody>
+	</table>
+	</div>
+	<div id="sidebar">
+	<table id="info" class="ui celled striped table right">
+	  <thead>
+		<tr>
+		  <th>
+			File Upload
+		  </th>
+		</tr>
+		<tr>
+		  <td>
+			<div class="ui fluid input">
+			  <!--Insert File Upload Thingy Here -->
+			</div>
+		  </td>
+		</tr>
+	  </thead>
+	</table>
+	<table class="ui celled striped table right">
+	  <thead>
+		<tr>
+		  <th>
+			Online Users
+		  </th>
+		</tr>
+		<tr>
+		  <td>
+			<div id="user_list" class="ui divided list">
+
+			</div>
+		  </td>
+		</tr>
+	  </thead>
+	</table> 
+    </div>
+	<div id="msgbox">
+	  <form class="ui fluid action input">
+		<input id="m" type="text" placeholder="Enter message here" autocomplete="off">
+	    <button id="send_btn" class="ui blue right labeled button">Send</button>
+	  </form>
+    </div>
+	<div id="whobox" class="ui small modal"> 
+	  <div class="header">
+		What is your name?
+	  </div>
+	  <div class="content">
+		<form class="ui fluid action input">
+		  <input id="username" type="text" placeholder="Enter your name">
+		  <button id="name_btn" class="ui blue right labeled button">Enter</button>
+		</form>
+	  </div>
+	</div>
+  </body>
+</html>
