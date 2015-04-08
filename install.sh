@@ -3,3 +3,4 @@ if [ -z "$(which node)" ]; then
   sudo apt-get install -y nodejs npm
 fi
 npm install
+mkdir uploads
