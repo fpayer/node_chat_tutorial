@@ -1,0 +1,20 @@
+{
+  "name": "aces_chat",
+  "description": "A real-time chat application with file transfers.",
+  "version": "0.1.0",
+  "private": false,
+  "author": "Franz Payer <fpayer@umd.edu>",
+  "contributors": [
+    {
+      "name": "Andrew Liu"
+    },
+    {
+      "name": "Toby Lin"
+    }
+  ],
+  "dependencies": {
+    "connect-busboy": "0.0.2",
+    "express": "^4.12.3",
+    "socket.io": "^1.3.5"
+  }
+}
