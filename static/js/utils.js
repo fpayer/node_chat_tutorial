@@ -4,7 +4,7 @@ toastr.options = {
   closeButton : true,
   debug : false,
   progressBar: true,
-  positionClass: 'toast-bottom-left',
+  positionClass: 'toast-bottom-right',
   onclick: null,
   showDuration: '300',
   hideDuration: '1000',
@@ -30,6 +30,34 @@ var notify = function(success, error, stat) {
 };
 
 $(document).ready(function() {
+  /* UI Configuration */
+  $('#whobox')
+    .modal({
+      closable : false
+    })
+    .modal('show')
+  ;
+
+  /*
+  setInterval(function() {
+    $('#chatter').scrollTop($('#chatter').scrollTop() + 10);
+  }, 10);
+  */
+  
+  $('#name_btn').on('click', function(){
+    name = $('#username').val();
+    $('#whobox').modal('hide');
+    return false;
+  });
+
+  $('#send_btn').on('click', function(){
+    var msgStr = $('#m').val();
+    socket.emit('chat_msg', { name: name, msg: msgStr });
+    console.log('Message sent: ' + msgStr);	
+    $('#m').val('');
+    return false;
+  });
+
   var uploader = new Dropzone('#dropzone', {
     url : '/upload',
     maxFilesize : 25

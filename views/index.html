@@ -2,19 +2,138 @@
 <html>
 
 <head>
+  <link rel="stylesheet" type="text/css" href="/static/dist/semantic.min.css"></script>
+  <link rel="stylesheet" type="text/css" href="/static/css/toastr.min.css"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/static/js/jquery.min.js"></script>
   <script src="/static/dist/semantic.min.js"></script>
   <script src="/static/js/dropzone.min.js"></script>
   <script src="/static/js/toastr.min.js"></script>
   <script src="/static/js/utils.js"></script>
-  <link rel="stylesheet" type="text/css" href="/static/dist/semantic.min.css"></script>
-  <link rel="stylesheet" type="text/css" href="/static/css/toastr.min.css"></script>
+
   <title>ACES Chat</title>
+
+	<style>
+	  #chat {
+      margin: 10px;
+	  }
+	  #sidebar {
+      margin: 10px;
+      width: 400px;
+      float: left;
+	  }
+	  #chatter {
+      width: calc(100% - 450px);
+      padding-right: 10px;
+      margin-right: 10px;
+      float: left;
+      height: calc(100% - 60px);
+      overflow-y: scroll;
+	  }
+	  #msgbox {
+      width: calc(100% - 450px);
+      margin: 10px;
+      position: fixed;
+      bottom: 0;
+	  }
+  </style>
+
 </head>
 
 <body>
+	<div id="chatter">
+	<table id="chat" class="ui celled striped table left">
+	  <thead>
+		<tr>
+		  <th>
+			NodeJS Chat App
+		  </th>
+		</tr>
+	  </thead>
+	  <tbody id="messages">
 
+	  </tbody>
+	</table>
+	</div>
+	<div id="sidebar">
+	<table id="info" class="ui celled striped table right">
+	  <thead>
+		<tr>
+		  <th>
+			File Upload
+		  </th>
+		</tr>
+		<tr>
+		  <td>
+			<div class="ui fluid input">
+			  <!--Insert File Upload Thingy Here -->
+        <form id="dropzone" class="dropzone" style="border:1px solid rgba(0,0,0,0.03); min-height:240px; -webkit-border-radius: 3px; border-radius:3px; background: rgba(0,0,0,0.03); padding: 23px; position: relative; cursor:pointer" action="/upload/">
+          <div class="dz-default">
+            <div class="dz-default dz-message" style="text-align:center">
+              <h2 class="ui icon header" style="margin-top:30px" id="uploadMessage">
+                <i class="upload icon"></i>
+                <div class="content"> 
+                  Drag your files here to upload <div class="sub header">(Or click to select files)</div>
+                </div>
+              </h2>
+              <div class="ui icon positive message" id="successMessage" style="display:none; margin-top: 70px; text-align: left">
+                <i class="checkmark icon"></i>
+                <div class="content">
+                  <div class="header">Success</div>
+                  <p> File uploaded. Drag another file or click here to upload again. </p>
+                </div>
+              </div>
+              <div class="ui icon negative message" id="failMessage" style="display:none; margin-top: 70px; text-align: left">
+                <i class="remove icon"></i>
+                <div class="content">
+                  <div class="header">Failure</div>
+                  <p> We could not upload your file.</p>
+                </div>
+              </div>
+            </div>
+          </div> 
+        </form>
+      </div>
+		  </td>
+		</tr>
+	  </thead>
+	</table>
+	<table class="ui celled striped table right">
+	  <thead>
+		<tr>
+		  <th>
+			Online Users
+		  </th>
+		</tr>
+		<tr>
+		  <td>
+			<div id="user_list" class="ui divided list">
+
+			</div>
+		  </td>
+		</tr>
+	  </thead>
+	</table> 
+    </div>
+	<div id="msgbox">
+	  <form class="ui fluid action input">
+		<input id="m" type="text" placeholder="Enter message here" autocomplete="off">
+	    <button id="send_btn" class="ui blue right labeled button">Send</button>
+	  </form>
+    </div>
+	<div id="whobox" class="ui small modal"> 
+	  <div class="header">
+		What is your name?
+	  </div>
+	  <div class="content">
+		<form class="ui fluid action input">
+		  <input id="username" type="text" placeholder="Enter your name">
+		  <button id="name_btn" class="ui blue right labeled button">Enter</button>
+		</form>
+	  </div>
+	</div>
+
+<!--
 <form id="dropzone" class="dropzone" style="border:1px solid rgba(0,0,0,0.03); min-height:240px; -webkit-border-radius: 3px; border-radius:3px; background: rgba(0,0,0,0.03); padding: 23px; position: relative; cursor:pointer" action="/upload/">
   <div class="dz-default">
     <div class="dz-default dz-message" style="text-align:center">
@@ -41,7 +160,7 @@
     </div>
   </div> 
 </form>
- 
+--> 
 </body>
 
 </html>
