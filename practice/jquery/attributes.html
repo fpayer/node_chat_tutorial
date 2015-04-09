@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/static/css/toastr.min.css"></script>
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/toastr.min.js"></script>
+  <script src="/static/js/checker.js"></script>
+  <script>
+    var challenges = [
+      {
+        text : 'Set the width of element with the id of \'first-div\' to 500px.',
+        checker : function() {
+          return $('#first-div').width() === 500;
+        }
+      },
+      {
+        text : 'Set the text \'p\' elements to \'updated text\'.',
+        checker : function() {
+          return $('p').text() === 'updated text';
+        }
+      },
+      {
+        text : 'Remove all \'br\' elements.',
+        checker : function() {
+          return $('br').length === 0;
+        }
+      }
+    ].reverse();
+
+    console.log('Welcome to the jQuery tutorial. This page focuses on properties.');
+
+    loadChallenges(challenges);
+
+    $('script').remove();
+  </script>
+</head>
+
+<body>
+  <h2>Open the developer console</h2>
+  <div id="first-div" class="main-div">
+    <table>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <div class="one two">
+    </div>
+    <div class="three">
+    </div>
+  </div>
+  <p>
+    Here is some text
+  </p>
+</body>
+
+</html>

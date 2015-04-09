@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/static/css/toastr.min.css"></script>
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/toastr.min.js"></script>
+  <script src="/static/js/checker.js"></script>
+  <script>
+    var challenges = [
+      {
+        text : 'Create a global variable \'a\' and set it to the jQuery selection of the td elements on this page.',
+        checker : function() {
+          return $('td').sequenceEqual(a);
+        }
+      },
+      {
+        text : 'Set your global variable \'a\' to the jQuery selection of the element with the id \'first-div\'.',
+        checker : function() {
+          return $('#first-div').sequenceEqual(a);
+        }
+      },
+      {
+        text : 'Set your global variable \'a\' to the jQuery selection of the elements with the \'one\' and \'two\' classes.',
+        checker : function() {
+          return $('.one.two').sequenceEqual(a);
+        }
+      },
+      {
+        text : 'Set your global variable \'a\' to the jQuery selection of the children of the \'first-div\' element.',
+        checker : function() {
+          return $('#first-div').children().sequenceEqual(a);
+        }
+      }
+    ];
+
+    console.log('Welcome to the jQuery tutorial. This page focuses on selectors.');
+
+    loadChallenges(challenges, './attributes.html');
+
+    $('script').remove();
+  </script>
+</head>
+
+<body>
+  <h2>Open the developer console</h2>
+  <div id="first-div" class="main-div">
+    <table>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <br>
+    <div class="one two">
+    </div>
+    <div class="three">
+    </div>
+  </div>
+  <p>
+    Here is some text
+  </p>
+</body>
+
+</html>

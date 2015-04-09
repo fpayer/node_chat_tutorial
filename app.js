@@ -71,7 +71,7 @@ app.post('/upload', function(req, res) {
 
 app.use('/static/', express.static(__dirname + '/static/'));
 app.use('/uploads/', express.static(__dirname + '/uploads/'));
-
+app.use('/practice/', express.static(__dirname + '/practice/'));
 
 /* Server startup */
 server.listen(config.port);
