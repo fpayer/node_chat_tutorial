@@ -21,13 +21,13 @@
         }
       },
       {
-        text : 'Set your global variable \'a\' to the jQuery selection of the elements with the \'one\' and \'two\' classes.',
+        text : 'Set your global variable \'a\' to the jQuery selection of the elements with both the \'one\' and \'two\' classes.',
         checker : function() {
           return $('.one.two').sequenceEqual(a);
         }
       },
       {
-        text : 'Set your global variable \'a\' to the jQuery selection of the children of the \'first-div\' element.',
+        text : 'Set your global variable \'a\' to the jQuery selection of the children of the element with the id of \'first-div\'.',
         checker : function() {
           return $('#first-div').children().sequenceEqual(a);
         }
@@ -53,6 +53,10 @@
     </table>
     <br>
     <div class="one two">
+    </div>
+    <div class="one">
+    </div>
+    <div class="two">
     </div>
     <div class="three">
     </div>

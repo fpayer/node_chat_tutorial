@@ -25,8 +25,14 @@
         checker : function() {
           return $('br').length === 0;
         }
+      },
+      {
+        text : 'Set the \'special\' data value of the element with the id of \'first-div\' to \'abc\'.',
+        checker : function() {
+          return $('#first-div').data('special') === 'abc';
+        }
       }
-    ].reverse();
+    ];
 
     console.log('Welcome to the jQuery tutorial. This page focuses on properties.');
 

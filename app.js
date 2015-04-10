@@ -74,5 +74,5 @@ app.use('/uploads/', express.static(__dirname + '/uploads/'));
 app.use('/practice/', express.static(__dirname + '/practice/'));
 
 /* Server startup */
-server.listen(config.port);
+server.listen(config.port, config.ip);
 console.log('Server starting up on', config.port);
