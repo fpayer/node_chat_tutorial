@@ -41,25 +41,6 @@ var getRandomInt = function(min, max) {
 };
 
 var utils = new (function() {
-  var get_funcs = {
-    /* 
-     * Grabs the name provided by the name modal
-    */
-    name : function() {
-      var name = $('#name-input').val();
-      if (name === '') {
-        name = 'Guest' + getRandomInt(10, 99);
-      }
-      return name;
-    },
-    /*
-     * Grabs the message the user inputed
-    */
-    message : function() {
-      return $('#message-input').val();
-    }
-  };
-
   var populate_funcs = {
     /*
      * Populates user list
@@ -115,42 +96,10 @@ var utils = new (function() {
     }
   };
 
-  var send_funcs = {
-    /*
-     * Gets user-provided name and passes it to the server
-    */
-    name : function() {
-      name = get_funcs.name();
-      socket.emit('name', name);
-      $('#name-modal').modal('hide');
-    },
-    /*
-     * Gets user-provided message and passes it to the server
-    */
-    message : function() {
-      var input = get_funcs.message();
-      if (input !== '') {
-        //Send data to server
-        socket.emit('message', {
-          name : name,
-          message : input
-        });
-        //Clear out old message
-        $('#message-input').val('');
-      }
-    }
-  };
-
   return {
-    get : function(val) {
-      return get_funcs[val]();
-    },
     populate : function(val, data) {
       populate_funcs[val](data);
     },
-    send : function(val) {
-      send_funcs[val]();
-    }
   }
 });
   
@@ -183,25 +132,37 @@ $(document).ready(function() {
   //Submit name on enter
   $('#name-input').on('keyup', function(e) {
     if (e.keyCode === 13) {
-      utils.send('name');
+      /* 
+       * TODO
+       * Grab user name, check if it is empty, set global name, and then emit it via socket.io
+      */
+      $('#name-modal').modal('hide');
     }
   });
   
   //Submit name on button press
   $('#name-btn').on('click', function() {
-    utils.send('name'); 
+    /* 
+     * TODO
+     * Grab user name, check if it is empty, set global name, and then emit it via socket.io
+    */
+    $('#name-modal').modal('hide');
   });
 
   //Submit message on enter
   $('#message-input').on('keyup', function(e) {
-    if (e.keyCode === 13) {
-      utils.send('message');
-    }
+    /*
+     * TODO
+     * Grab message, check if it is empty and then emit it via socket.io
+     */
   });
   
   //Submit message on button press
   $('#message-btn').on('click', function() {
-    utils.send('message'); 
+    /*
+     * TODO
+     * Grab message, check if it is empty and then emit it via socket.io
+     */
   });
 
   //Handles file uploads

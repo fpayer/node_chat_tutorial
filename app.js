@@ -24,21 +24,17 @@ io.on('connection', function(client) {
   console.log('Client connected from', client.handshake.address);
 
   client.on('message', function(message) {
-    io.sockets.emit('message', message);
+    //Broadcast message to everyone
   });
 
   client.on('name', function(name) {
-    client.name = name;
-    users.push(name);
-    io.sockets.emit('users', users);
+    //Add name to client and push to user array
+    //Broadcast user list to all clients
   });
 
   client.on('disconnect', function() {
-    console.log('Client', client.handshake.address, 'disconnected');
-    if (client.name) {
-      remove(users, client.name);
-      client.broadcast.emit('users', users);
-    }
+    //Remove user's name from user array
+    //Broadcast new uster list to clients
   });
 });
 
