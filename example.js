@@ -1,5 +1,5 @@
 var x; //Creates a new object, value set to undefined
- x = null; //Null != undefined, both eval to false
+x = null; //Null != undefined, both eval to false
 
 x = 123; //Basic variable assignment
 x = '123'; //Variable types can change
@@ -26,6 +26,12 @@ x[key]; //Returns 'value'
 
 //Javascript has function scope
 x = 123;
+
+var func2 = function() {
+  window.x = 5;
+  abc = 123;
+};
+
 var func = function() {
   var x = 0;
   console.log(x); //Prints out 0
@@ -36,5 +42,7 @@ var func = function() {
     y++;
     x++;
   }
-  console.log(y) //Prints out 5;
+  console.log(y) //Prints out 1;
+
+  func2();
 };
